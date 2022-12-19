@@ -1,0 +1,45 @@
+.t{
+  margin-left: 2%;
+}
+.sub{
+  color: white;
+  background-color: royalblue;
+  margin-left: 1%;
+  border-radius: 20px;
+}
+.anul{
+  color: white;
+  background-color: red;
+  margin-left: 81%;
+  border-radius: 20px;
+}
+
+.subm{
+  color: white;
+  background-color: royalblue;
+  margin-left: 87%;
+  border-radius: 20px;
+}
+
+.pagination{
+  margin-top: 3%;
+  margin-left:65%;
+}
+
+.border{
+  border-radius: 10px;
+  }
+
+  .lar{
+    width: 70px;
+  }
+  .loading{
+    position: absolute;
+    margin-left: 40%;
+    margin-top: 10%;
+  }
+
+  .warning{
+    color: royalblue;
+    margin-left: 20%;
+  }

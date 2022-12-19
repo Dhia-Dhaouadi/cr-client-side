@@ -1,0 +1,321 @@
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title"><i class="feather icon-user"></i> Client</h6>
+        <select  class="form-select lar border" (change)="OnTableSizechange($event)">
+          <option *ngFor="let size of TableSizes">
+             {{size}}
+          </option>
+     </select>
+     <div class="spinner-border text-primary loading" role="status" *ngIf="!clients">
+    </div>
+        <div class="table-responsive pt-3">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Téléphone</th>
+                <th>Montant fidélité</th>
+                <th>Nombre de commande de l'année</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let client of clients | paginate:{
+              itemsPerPage:TableSize,
+              currentPage:Page,
+              totalItems:Count }; let i = index">
+              <tr *ngIf="client.type!='fidèle'">
+                <td>{{client.id}}</td>
+                <td>{{client.NomClient}}</td>
+                <td>{{client.PrenomClient}}</td>
+                <td>{{client.Telephone}}</td>
+                <td>{{client.Montantfidilite}}</td>
+                <td>{{client.NbrComa}}</td>
+                <td><a class="btn btn-primary" type="button" (click)="openXlModal(userdetails)"><i class="feather icon-eye"></i></a>
+                  <a class="btn btn-primary t"  type="button" (click)="openXlModal(updateclient)"><i class="feather icon-edit"></i></a>
+                  <a class="btn btn-primary t"  type="button" (click)=" Deleteclient(client.id)"><i class="feather icon-delete"></i></a></td>
+                  <ng-template #userdetails let-modal class="border">
+                    <div class="modal-header">
+                      <h5><i class="feather icon-user"></i> {{client.NomClient}} {{client.PrenomClient}}</h5>
+                      <button type="button" class="btn-close" (click)="modal.close('by: close
+                        icon')" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Nom : {{client.NomClient}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Prénom : {{client.PrenomClient}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3 mt-1">
+                            <h5>Civilité : {{client.Civilite}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Société : {{client.Societe}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Téléphone : {{client.Telephone}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Email : {{client.Email}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Date de naissance : {{client.DateNaissance | date:'medium'}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Adresse : {{client.Adresse}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Ville :  {{client.Ville}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Code Postale : {{client.CodePostal}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Batiment : {{client.Batiment}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Etage : {{client.Etage}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Sonnette : {{client.Sonette}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Code1 : {{client.Code1}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Code2 : {{client.Code2}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Code3 : {{client.Code3}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-8">
+                          <div class="mb-3">
+                            <h5>Commentaire : {{client.Commentaire}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Montant fidélité : {{client.Montantfidilite}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Code barre : {{client.Codebarre}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Nombre de commande de l'année : {{client.NbrComa}}</h5>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template #updateclient let-modal class="border">
+                    <div class="card">
+                      <div class="card-body">
+                        <h3 class="card-title addcl"><i class="feather icon-user"></i> {{client.NomClient}} {{client.PrenomClient}}</h3>
+                        <form (ngSubmit)="UpdateClient(client)"> <div class="col-sm-12">
+                          <div class="mb-3">
+                            <p class="warning"> Nom client, Prenom client, civilité, téléphone, Date de naissance, Montant fidélité sont des champs obligatoires </p>
+                          </div>
+                        </div>
+                          <div class="col-sm-4">
+                            <div class="mb-3">
+                              <input type="hidden" class="form-control" [(ngModel)]="client.id" [ngModelOptions]="{standalone: true}" required placeholder="Entrer Nom">
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Nom</label>
+                                <input type="text" class="form-control" [(ngModel)]="client.NomClient" [ngModelOptions]="{standalone: true}" required placeholder="Entrer Nom">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Prénom</label>
+                                <input type="text" class="form-control"  [(ngModel)]="client.PrenomClient" [ngModelOptions]="{standalone: true}" required placeholder="Entrer Prénom">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3 mt-1">
+                                <label class="form-label">Civilité</label>
+                                <select class="form-select form-select-sm mb-3 border" [(ngModel)]="client.Civilite" [ngModelOptions]="{standalone: true}" required>
+                                  <option selected  value="M">M</option>
+                                  <option value="Mme">Mme</option>
+                                  <option value="Famille">Famille</option>
+                                  <option value="Entreprise">Entreprise</option>
+                                  <option value="Groupe">Group</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Société</label>
+                                <input type="text" class="form-control" [(ngModel)]="client.Societe" [ngModelOptions]="{standalone: true}" required placeholder="Entrer société">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Téléphone</label>
+                                <input type="number" class="form-control" [(ngModel)]="client.Telephone" [ngModelOptions]="{standalone: true}" required placeholder="Entrer N téléphone">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" [(ngModel)]="client.Email" [ngModelOptions]="{standalone: true}" required placeholder="Entrer Email">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Date de naissance</label>
+                                <input type="date" class="form-control" [(ngModel)]="client.DateNaissance" [ngModelOptions]="{standalone: true}" required>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Adresse</label>
+                                <input type="text" class="form-control" [(ngModel)]="client.Adresse" [ngModelOptions]="{standalone: true}" required placeholder="Entrer adresse">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Ville</label>
+                                <input type="text" class="form-control" [(ngModel)]="client.Ville" [ngModelOptions]="{standalone: true}" required placeholder="Entrer ville">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Code Postale</label>
+                                <input type="text" class="form-control" [(ngModel)]="client.CodePostal" [ngModelOptions]="{standalone: true}" required placeholder="Entrer société">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Batiment</label>
+                                <input type="text" class="form-control" [(ngModel)]="client.Batiment" [ngModelOptions]="{standalone: true}" required placeholder="N Bat expl">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Etage</label>
+                                <input type="number" class="form-control" [(ngModel)]="client.Etage" [ngModelOptions]="{standalone: true}" required placeholder="N Etage">
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="mb-3">
+                                <label class="form-label">Sonnette</label>
+                                <input type="text" class="form-control" [(ngModel)]="client.Sonette" [ngModelOptions]="{standalone: true}" required placeholder="sonnette">
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="mb-3">
+                                <label class="form-label">Code1</label>
+                                <input type="number" class="form-control" [(ngModel)]="client.Code1" [ngModelOptions]="{standalone: true}" required placeholder="Code N 1">
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="mb-3">
+                                <label class="form-label">Code2</label>
+                                <input type="number" class="form-control" [(ngModel)]="client.Code2" [ngModelOptions]="{standalone: true}" required placeholder="Code N 2">
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="mb-3">
+                                <label class="form-label">Code3</label>
+                                <input type="number" class="form-control" [(ngModel)]="client.Code3" [ngModelOptions]="{standalone: true}" required placeholder="Code N 3">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Type</label>
+                                <select class="form-select form-select-sm mb-3 border" [(ngModel)]="client.type" [ngModelOptions]="{standalone: true}" required>
+                                  <option value=" "> </option>
+                                  <option value="fidèle">fidèle</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-8">
+                              <div class="mb-3">
+                                <label class="form-label">Commentaire</label>
+                                <input type="text" class="form-control"  [(ngModel)]="client.Commentaire" [ngModelOptions]="{standalone: true}" required placeholder="Entrer commentaire">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Montant fidélité</label>
+                                <input type="number" class="form-control"  [(ngModel)]="client.Montantfidilite" [ngModelOptions]="{standalone: true}" required placeholder="Entrer Montant">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Code barre</label>
+                                <input type="text" class="form-control" [(ngModel)]="client.Codebarre" [ngModelOptions]="{standalone: true}" required placeholder="Entrer code barre">
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="mb-3">
+                                <label class="form-label">Nombre de commande de l année</label>
+                                <input type="number" class="form-control" [(ngModel)]="client.NbrComa" [ngModelOptions]="{standalone: true}" required placeholder="Nbr">
+                              </div>
+                            </div>
+
+                          </div>
+
+                          <button class="btn anul" [swal]="{position: 'top-end', title: 'Annulation', text: '', showConfirmButton: false, timer: 5000, icon: 'error'}" (click)="modal.close('by: close icon')">Annuler</button>
+                          <button type="submit" class="btn sub" (click)="modal.close('by: close icon')" [disabled]="!client.NomClient || !client.PrenomClient|| !client.Civilite|| !client.Telephone||!client.DateNaissance">Enregistrer</button>
+                        </form>
+                      </div>
+                    </div>
+                  </ng-template>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <pagination-controls  previousLabel="Prev" nextLabel="Next" (pageChange)="OnTableDataChange($event)">
+            </pagination-controls>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

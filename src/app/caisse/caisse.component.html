@@ -1,0 +1,125 @@
+<div class="row lef">
+  <div class="col-md-10">
+    <h5 class="card-title time"><i class="mdi mdi-timetable ic"></i>{{dateTime
+      |async| date:'medium' }}</h5>
+  </div>
+  <div class="col-md-2 ">
+    <a href="" (click)="onLogout($event)" class="d-flex text-body ms-0 lf">
+      <i class="feather icon-log-out me-2 icon-md"></i>
+      <span>Déconnexion</span>
+    </a>
+  </div>
+</div>
+
+<div class="row chat-wrapper">
+  <div class="col-md-12">
+    <div class="card border">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 grid-margin stretch-card" type="button"
+            (click)="openLgModal(enface)">
+            <div class="card border btt">
+              <div class="card-body d-flex flex-column align-items-center">
+                <p class="btt"><i class="feather icon-user-check"></i>&nbsp;&nbsp;&nbsp;En
+                  face</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 grid-margin stretch-card" type="button"
+            (click)="openLgModal(telephone)">
+            <div class="card border btt">
+              <div class="card-body d-flex flex-column align-items-center">
+                <p class="btt"><i class="feather icon-phone-call"></i>&nbsp;&nbsp;&nbsp;Téléphone</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 grid-margin stretch-card">
+          </div>
+          <div class="col-md-8 grid-margin stretch-card mt-5">
+            <div class="card border">
+              <div class="card-body d-flex flex-column align-items-center">
+                <h3 class="borne">Borne</h3><br>
+                <div class="input-group mt-5">
+                  <input class="form-control border" type="text" placeholder="Scanner le code barre du ticket borne">
+                  <button class="btn btn-icon border okk" type="button"
+                    id="button-search-addon">Ok</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 grid-margin stretch-card">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #enface let-modal class="border">
+  <div class="modal-header">
+    <h5 class="modal-title mtitre" id="exampleModalLabel"><i class="feather
+        icon-user-check"></i>&nbsp;&nbsp;&nbsp;En face</h5>
+    <button type="button" class="btn-close" (click)="modal.close('by: close
+      icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6 grid-margin stretch-card" type="button"
+        (click)="modal.close('by: close icon')" routerLink="/Caissee/En face/Emporter" >
+        <div class="card border btt">
+          <div class="card-body d-flex flex-column align-items-center">
+            <p class="btt"><i class="feather icon-shopping-bag"></i>&nbsp;&nbsp;&nbsp;Emporter</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 grid-margin stretch-card" type="button"
+        (click)="modal.close('by: close icon')" routerLink="/Caissee/En face/Sur place">
+        <div class="card border btt">
+          <div class="card-body d-flex flex-column align-items-center">
+            <p class="btt"><i class="mdi mdi-silverware-variant"></i>&nbsp;&nbsp;&nbsp;Sur
+              place</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #telephone let-modal class="border">
+  <div class="modal-header">
+    <h5 class="modal-title mtitre" id="exampleModalLabel"><i class="feather
+        icon-phone-call"></i>&nbsp;&nbsp;&nbsp;Téléphone</h5>
+    <button type="button" class="btn-close" (click)="modal.close('by: close
+      icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-4 grid-margin stretch-card" type="button"
+        (click)="modal.close('by: close icon')" routerLink="/Caissee/Téléphone/Emporter">
+        <div class="card border btt">
+          <div class="card-body d-flex flex-column align-items-center">
+            <p class="btt"><i class="feather icon-shopping-bag"></i>&nbsp;&nbsp;&nbsp;Emporter</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 grid-margin stretch-card" type="button"
+        (click)="modal.close('by: close icon')" routerLink="/Caissee/Téléphone/Livraison">
+        <div class="card border btt">
+          <div class="card-body d-flex flex-column align-items-center">
+            <p class="btt"><i class="mdi mdi-motorbike"></i>&nbsp;&nbsp;&nbsp;Livraison</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 grid-margin stretch-card" type="button"
+        (click)="modal.close('by: close icon')" routerLink="/Caissee/Téléphone/Sur place">
+        <div class="card border btt">
+          <div class="card-body d-flex flex-column align-items-center">
+            <p class="btt"><i class="mdi mdi-silverware-variant"></i>&nbsp;&nbsp;&nbsp;Sur
+              place</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

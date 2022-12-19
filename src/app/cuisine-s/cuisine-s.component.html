@@ -1,0 +1,18 @@
+
+<h5 class="card-title time"><i class="mdi mdi-timetable ic"></i>{{dateTime
+  |async| date:'medium' }}</h5>
+<div class="spinner-border text-primary loading" role="status"
+  *ngIf="!categorie">
+</div>
+<div class="row mt-5">
+  <div class="col-md-4 grid-margin" type="button" *ngFor="let c of categorie">
+    <ngb-alert [dismissible]="false" [type]="'primary'" style="font-size:
+      25px;">
+      N° commande -- {{c.id}}
+    </ngb-alert>
+    <ul class="list-group">
+      <li class="list-group-item cuis">{{c.Categorie}}</li>
+
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,193 @@
+<div class="row">
+    <div class="col-md-12 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title"><i class="feather icon-user-plus"></i>  Ajouter Client</h6>
+          <form (ngSubmit)="Addclient()">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="mb-3">
+                  <p class="warning"> Nom client, Prenom client, civilité, téléphone, Date de naissance, Montant fidélité sont des champs obligatoires </p>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Nom</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.NomClient" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Entrer Nom">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Prénom</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.PrenomClient"
+                    [ngModelOptions]="{standalone: true}" required
+                    placeholder="Entrer Prénom">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3 mt-1">
+                  <label class="form-label">Civilité</label>
+                  <select class="form-select form-select-sm mb-3 border"
+                    [(ngModel)]="client.Civilite" [ngModelOptions]="{standalone:
+                    true}" required>
+                    <option selected value="M">M</option>
+                    <option value="Mme">Mme</option>
+                    <option value="Famille">Famille</option>
+                    <option value="Entreprise">Entreprise</option>
+                    <option value="Groupe">Group</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Société</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.Societe" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Entrer société">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Téléphone</label>
+                  <input type="number" class="form-control"
+                    [(ngModel)]="client.Telephone" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Entrer N téléphone">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control"
+                    [(ngModel)]="client.Email" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Entrer Email">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Date de naissance</label>
+                  <input type="date" class="form-control"
+                    [(ngModel)]="client.DateNaissance"
+                    [ngModelOptions]="{standalone: true}" required>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Adresse</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.Adresse" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Entrer adresse">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Ville</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.Ville" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Entrer ville">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Code Postale</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.CodePostal" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Entrer société">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Batiment</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.Batiment" [ngModelOptions]="{standalone:
+                    true}" required placeholder="N Bat expl">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Etage</label>
+                  <input type="number" class="form-control"
+                    [(ngModel)]="client.Etage" [ngModelOptions]="{standalone:
+                    true}" required placeholder="N Etage">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Sonnette</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.Sonette" [ngModelOptions]="{standalone:
+                    true}" required placeholder="sonnette">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Code1</label>
+                  <input type="number" class="form-control"
+                    [(ngModel)]="client.Code1" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Code N 1">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Code2</label>
+                  <input type="number" class="form-control"
+                    [(ngModel)]="client.Code2" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Code N 2">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Code3</label>
+                  <input type="number" class="form-control"
+                    [(ngModel)]="client.Code3" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Code N 3">
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="mb-3">
+                  <label class="form-label">Commentaire</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.Commentaire"
+                    [ngModelOptions]="{standalone: true}" required
+                    placeholder="Entrer commentaire">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Montant fidélité</label>
+                  <input type="number" class="form-control"
+                    [(ngModel)]="client.Montantfidilite"
+                    [ngModelOptions]="{standalone: true}" required
+                    placeholder="Entrer Montant">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Code barre</label>
+                  <input type="text" class="form-control"
+                    [(ngModel)]="client.Codebarre" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Entrer code barre">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label class="form-label">Nombre de commande de l année</label>
+                  <input type="number" class="form-control"
+                    [(ngModel)]="client.NbrComa" [ngModelOptions]="{standalone:
+                    true}" required placeholder="Nbr">
+                </div>
+              </div>
+
+            </div>
+
+            <button class="btn anul" [swal]="{position: 'top-end', title:
+              'Annulation', text: '', showConfirmButton: false, timer: 5000, icon:
+              'error'}" >Annuler</button>
+            <button type="submit" class="btn sub" [disabled]="!client.NomClient || !client.PrenomClient|| !client.Civilite|| !client.Telephone||!client.DateNaissance">Enregistrer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,38 @@
+.subm{
+  color: white;
+  background-color: royalblue;
+  margin-left: 87%;
+  border-radius: 20px;
+
+}
+
+.sub{
+  color: white;
+  background-color: royalblue;
+  margin-left: 1%;
+  border-radius: 20px;
+}
+.anul{
+  color: white;
+  background-color: red;
+  margin-left: 81%;
+  border-radius: 20px;
+}
+
+.t{
+  margin-left: 2%;
+}
+
+.pagination {
+  margin-top: 3%;
+  margin-left: 65%;
+}
+
+.lar {
+  width: 70px;
+}
+.loading{
+  position: absolute;
+  margin-left: 40%;
+  margin-top: 10%;
+}

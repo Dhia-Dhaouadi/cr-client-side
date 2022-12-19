@@ -1,0 +1,217 @@
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title"><i class="feather icon-codesandbox"></i>
+          Composition produit</h4>
+        <button class="btn categ" (click)="openXlModal(Addcomposition)">Ajouter
+          Composition</button>
+          <select  class="form-select lar border" (change)="OnTableSizechange($event)">
+            <option *ngFor="let size of TableSizes">
+               {{size}}
+            </option>
+       </select>
+       <div class="spinner-border text-primary loading" role="status" *ngIf="!composition">
+      </div>
+        <div class="table-responsive mt-3">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Produit</th>
+                <th>Catégorie de composition</th>
+                <th>Composition</th>
+                <th>Affichage</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let compo of composition | paginate:{
+              itemsPerPage:TableSize,
+              currentPage:Page,
+              totalItems:Count }; let i = index">
+              <tr>
+                <td>{{compo.id}}</td>
+                <td>{{compo.Produit}}</td>
+                <td>{{compo.CategorieCompos}}</td>
+                <td>{{compo.CompositionName}}</td>
+                <td>{{compo.Affichage}}</td>
+                <td><a class="btn btn-primary" type="button"
+                    (click)="openXlModal(compdetails)"><i class="feather
+                      icon-eye"></i></a>
+                  <a class="btn btn-primary t" type="button"
+                    (click)="openXlModal(updatecompo)"><i class="feather
+                      icon-edit"></i></a>
+                  <a class="btn btn-primary t" type="button"
+                    (click)="deleteComposition(compo.id)"><i class="feather
+                      icon-delete"></i></a></td>
+                <ng-template #compdetails let-modal class="border">
+                  <div class="modal-header">
+                    <h5><i class="feather icon-codesandbox"></i>
+                      {{compo.CompositionName}}</h5>
+                    <button type="button" class="btn-close"
+                      (click)="modal.close('by: close
+                      icon')" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Produit :{{compo.Produit}}</h5>
+
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Catégorie de Composition : {{compo.CategorieCompos}}
+                          </h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Nom Composition : {{compo.CompositionName}} </h5>
+                          </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Affichage dans cuisine : {{compo.AffichageCuisine}}</h5>
+
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Affichage dans cuisine :  {{compo.Affichage}}</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #updatecompo let-modal class="border">
+                  <div class="modal-header">
+                    <h5><i class="feather icon-codesandbox"></i>
+                      {{compo.CompositionName}}</h5>
+                    <button type="button" class="btn-close"
+                      (click)="modal.close('by: close
+                      icon')" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form (ngSubmit)="updateComposition(compo)">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Produit : {{compo.Produit}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Catégorie de Composition : {{compo.CategorieCompos}}
+                            </h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <h5>Nom Composition : {{compo.CompositionName}}</h5>
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3">
+                            <label class="form-label">Affichage dans cuisine</label>
+                            <input type="text" class="form-control"
+                              [(ngModel)]="compo.AffichageCuisine"
+                              [ngModelOptions]="{standalone: true}" required
+                              placeholder="Entrer abréviation">
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="mb-3 mt-1">
+                            <label class="form-label">Affichage</label>
+                            <select class="form-select form-select-sm mb-3
+                              border" [(ngModel)]="compo.Affichage"
+                              [ngModelOptions]="{standalone: true}" required>
+                              <option value="Desactivé">Desactivé</option>
+                              <option value="Activé">Activé</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <button class="btn anul" (click)="modal.close('by: close
+                        icon')"
+                        [swal]="{position: 'top-end', title: 'Annulation', text:
+                        '',
+                        showConfirmButton: false, timer: 1500, icon: 'error'}">Annuler</button>
+                      <button type="submit" (click)="modal.close('by: close
+                        icon')" class="btn sub" [disabled]="!compo.CompositionName || !compo.AffichageCuisine || !compo.Affichage">Enregistrer</button>
+                    </form>
+                  </div>
+                </ng-template>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <pagination-controls previousLabel="Prev" nextLabel="Next"
+              (pageChange)="OnTableDataChange($event)">
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #Addcomposition let-modal class="border">
+  <div class="modal-header">
+    <h5><i class="feather icon-codesandbox"></i> Ajouter Composition</h5>
+    <button type="button" class="btn-close" (click)="modal.close('by: close
+      icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)=" Addcompostion()">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Produit -- Catégorie composition</label>
+            <select class="form-select form-select-sm mb-3 border"
+              (change)="getidcompo($event)">
+              <option *ngFor="let cc of Compocat "value="{{cc.id}}">{{cc.Product}}
+                -- {{cc.CatgorieCompo}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Nom Composition</label>
+            <input type="text" class="form-control"
+              [(ngModel)]="Composition.CompositionName"
+              [ngModelOptions]="{standalone: true}" required placeholder="Entrer Composition">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="mb-3">
+            <label class="form-label">Affichage dans cuisine</label>
+            <input type="text" class="form-control"
+              [(ngModel)]="Composition.AffichageCuisine"
+              [ngModelOptions]="{standalone: true}" required placeholder="Entrer abréviation">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="mb-3 mt-1">
+            <label class="form-label">Affichage</label>
+            <select class="form-select form-select-sm mb-3 border"
+              [(ngModel)]="Composition.Affichage" [ngModelOptions]="{standalone:
+              true}" required>
+              <option value="Desactivé">Desactivé</option>
+              <option value="Activé">Activé</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn anul" (click)="modal.close('by: close icon')"
+        [swal]="{position: 'top-end', title: 'Annulation', text: '',
+        showConfirmButton: false, timer: 1500, icon: 'error'}">Annuler</button>
+      <button type="submit" (click)="modal.close('by: close icon')" class="btn
+        sub" [disabled]="!Composition.CompositionName || !Composition.AffichageCuisine || !Composition.Affichage">Enregistrer</button>
+    </form>
+  </div>
+</ng-template>

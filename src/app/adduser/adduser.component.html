@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title"><i class="feather icon-user-plus"></i>  Ajouter utilisateur</h6>
+        <form  (ngSubmit)="Adduser()">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Nom Entreprise</label>
+                <input type="text" class="form-control"  name="nomentreprise" placeholder="Nom Entreprise" [(ngModel)]="user.NomEntreprise" [ngModelOptions]="{standalone: true}" required value="Urbanfoods">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Code Entreprise</label>
+                <input type="number" class="form-control"  id="codeentreprise" [(ngModel)]="user.CodeEntreprise" [ngModelOptions]="{standalone: true}" required placeholder="Code Entreprise">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Nom</label>
+                <input type="text" class="form-control"  id="nom"  placeholder="Entrer Nom" [(ngModel)]="user.NomUser" [ngModelOptions]="{standalone: true}" required>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Prénom</label>
+                <input type="text" class="form-control"   id="prenom" placeholder="Entrer Prénom" [(ngModel)]="user.PrenomUser" [ngModelOptions]="{standalone: true}" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Mot de passe</label>
+                <input type="password" class="form-control"  id="login" placeholder="Entrer Mot de passe" [(ngModel)]="user.Login" [ngModelOptions]="{standalone: true}" required>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control"   id="email" placeholder="Enter Email" [(ngModel)]="user.Email" [ngModelOptions]="{standalone: true}" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Role</label>
+                <select class="form-select form-select-sm mb-3 border"   id="role" [(ngModel)]="user.Role" [ngModelOptions]="{standalone: true}" required>
+                  <option selected  value="Administrateur">Administrateur</option>
+                  <option value="Caissier">Caissier</option>
+                  <option value="Cuisinier">Cuisinier</option>
+                  <option value="Livreur">Livreur</option>
+                  <option value="Pointage">Pointage</option>
+                </select>
+              </div>
+            </div>
+           <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Téléphone</label>
+                <input type="text" class="form-control"   id="telephone" placeholder="Entrer N° Tel" [(ngModel)]="user.Telephone" [ngModelOptions]="{standalone: true}" required>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Date d'ajout</label>
+                <input type="date" class="form-control" placeholder=""  id="dateajout" [(ngModel)]="user.DateAjout" [ngModelOptions]="{standalone: true}" required>
+              </div>
+            </div>
+          </div>
+          <button class="btn anul" [swal]="{position: 'top-end', title: 'Annulation', text: '', showConfirmButton: false, timer: 1500, icon: 'error'}">Annuler</button>
+          <button type="submit"  class="btn subm"   [disabled]="!user.NomEntreprise || !user.CodeEntreprise|| !user.NomUser|| !user.PrenomUser||!user.Login || !user.Email || !user.Role || !user.Telephone || !user.DateAjout"  id="enregistrer">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

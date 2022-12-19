@@ -1,0 +1,17 @@
+.warning{
+    color: royalblue;
+    margin-left: 20%;
+  }
+
+  .sub{
+    color: white;
+    background-color: royalblue;
+    margin-left: 1%;
+    border-radius: 20px;
+  }
+  .anul{
+    color: white;
+    background-color: red;
+    margin-left: 81%;
+    border-radius: 20px;
+  }

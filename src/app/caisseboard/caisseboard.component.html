@@ -1,0 +1,570 @@
+<div class="row mt-3">
+  <div class="col-md-12 grid-margin">
+    <div class="card border">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 grid-margin" type="button"
+            routerLink="/recherche-client-caisse">
+            <div class="card article border">
+              <div class="card-body d-flex flex-column align-items-center">
+                <p class="text-muted mb-3 article"><i class="feather
+                    icon-search"></i>&nbsp;&nbsp;Numéro de télephone/Nom/Prénom</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 grid-margin" type="button"
+            (click)="openXlModal1(modal)">
+            <div class="card article border">
+              <div class="card-body d-flex flex-column align-items-center">
+                <p class="text-muted mb-3 article"><i class={{this.icon}}></i>&nbsp;&nbsp;&nbsp;{{this.type}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 grid-margin" type="button" type="button"
+            (click)="openXlModal1(modal1)">
+            <div class="card article border">
+              <div class="card-body d-flex flex-column align-items-center">
+                <p class="text-muted mb-3 article"><i class={{this.icon1}}></i>&nbsp;&nbsp;&nbsp;{{this.typee}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1 grid-margin" type="button"
+            (click)="openXlModal1(fidelite)">
+            <div class="card article border">
+              <div class="card-body d-flex flex-column align-items-center">
+                <p class="text-muted mb-3 article"><i class="mdi
+                    mdi-barcode-scan"></i></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 grid-margin" type="button"
+            (click)="openXlModal(createclient)">
+            <div class="card article border">
+              <div class="card-body d-flex flex-column align-items-center">
+                <p class="text-muted mb-3 article"><i class="feather
+                    icon-user-check"></i>&nbsp;&nbsp;Client</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #fidelite let-modal class="border">
+    <div class="modal-header">
+      <h2 class="mb-2"><i class="feather icon-gift" style="margin-right:3%;"></i>Fidélité</h2>
+      <button type="button" class="btn-close" (click)="modal.close('by: close
+        icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row" style="margin-left:1%">
+        <div class="col-md-9 grid-margin ">
+          <h3 class="fidelite"><i class="feather icon-alert-triangle alerte"></i>Etes-vous
+            sûr que ce client ne dispose pas de compte ?</h3>
+        </div>
+        <div class="col-md-3 grid-margin ">
+          <button class="btn btn-icon ok border" type="button"
+            id="button-search-addon top" routerLink="/recherche-client-caisse"
+            (click)="modal.close('by: close icon')" aria-label="Close"><i
+              class="feather icon-check"></i>Vérifier</button>
+        </div>
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="input-group mt-5">
+            <input class="form-control border" type="text" placeholder="Scanner code barre">
+            <button class="btn btn-icon ok border" type="button"
+              id="button-search-addon"><i class="feather icon-search"></i></button>
+            <button class="btn btn-icon no border" type="button"
+              id="button-search-addon"><i class="feather icon-x"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="row">
+    <div class="col-md-6 grid-margin">
+      <div class="card border">
+        <div class="card-body">
+          <div class="row">
+            <div class="spinner-border text-primary loading" role="status" *ngIf="!Categories">
+            </div>
+            <div class="col-md-3 grid-margin" type="button"
+              (click)="openXlModal(tacos)" *ngFor="let cat of Categories"
+              [hidden]="cat.Affichage=='Desactivé'">
+              <div class="card article border carte">
+                <div class="card-body align-items-center">
+                  <p class="text-muted mb-3 article">{{cat.Categorie}}</p>
+                </div>
+              </div>
+              <ng-template #tacos let-modal class="border">
+                <div class="modal-header">
+                  <h2 class="mb-2">{{cat.Categorie}}</h2>
+                  <button type="button" class="btn-close"
+                    (click)="modal.close('by: close
+                    icon')" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-2 grid-margin" (click)="modal.close('by:
+                      close
+                      icon')" aria-label="Close" type="button"
+                      (click)="openXlModal(tacosm)" *ngFor="let prod of
+                      Products" [hidden]="prod.categorie!=cat.Categorie ||
+                      prod.Type=='Pas composé' ||
+                      prod.Affichage=='Desactivé'">
+                      <div class="card style border carte">
+                        <div class="card-body align-items-center">
+                          <p class="text-muted mb-3 style">{{prod.ProductName}}
+                            &nbsp; {{prod.Pricev}} € </p>
+                          <p class="text-muted mb-3 style" [hidden]="prod.promo<0
+                            || prod.promo==null">Reduction : - {{prod.promo}} %
+                          </p>
+                        </div>
+                      </div>
+                      <ng-template #tacosm let-modal class="border">
+                        <div class="modal-header">
+                          <h2 class="mb-2">{{prod.ProductName}}</h2>
+                          <h5 class="mb-2" [hidden]="prod.promo<0 ||
+                            prod.promo==null">(Reduction : - {{prod.promo}} %)</h5>
+                          <button type="button" class="btn-close"
+                            (click)="modal.close('by: close
+                            icon')" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-6 grid-margin">
+                              <div class="mb-6">
+                                <select class="form-select form-select-sm mb-3
+                                  border">
+                                  <label class="form-label">Quantité</label>
+                                  <option selected>Quantité</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="1">4</option>
+                                  <option value="2">5</option>
+                                  <option value="3">6</option>
+                                  <option value="1">7</option>
+                                  <option value="2">8</option>
+                                  <option value="3">9</option>
+                                  <option value="1">10</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-6 grid-margin ">
+                              <button class="btn btn-icon ok border ok"
+                                type="button"
+                                id="button-search-addon"><i class="feather
+                                  icon-check"></i>Valider</button>
+                              <button class="btn btn-icon ok border no"
+                                type="button" [swal]="{
+                                position: 'top-end', title: 'Annulation', text:
+                                '',
+                                showConfirmButton: false, timer: 1500, icon:
+                                'error'}"
+                                (click)="modal.close('by: close icon')"
+                                id="button-search-addon"><i
+                                  class="feather icon-x "></i>Annuler</button>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 grid-margin" *ngFor="let comcat
+                              of Compocat"
+                              [hidden]="comcat.Product!=prod.ProductName ||
+                              comcat.Affichage=='Desactivé' ">
+                              <div class="card border">
+                                <h2 class="mb-2 titre"
+                                  *ngIf="comcat.CatgorieCompo=='Sans'"
+                                  style="color:red !important">{{comcat.CatgorieCompo}}</h2>
+                                <h2 class="mb-2 titre"
+                                  *ngIf="comcat.CatgorieCompo!='Sans'">{{comcat.CatgorieCompo}}</h2>
+                                <div class="card-body">
+                                  <div class="row">
+                                    <div class="col-md-2 grid-margin" *ngFor="let comp of compositions"
+                                    [hidden]="comcat.CatgorieCompo!=comp.CategorieCompos
+                                    || comcat.Product != comp.Produit ||
+                                    comp.Affichage=='Desactivé' ">
+                                      <input type="checkbox" class="btn-check"  autocomplete="off">
+                                      <label class="btn btn-outline-success">{{comp.CompositionName}}</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              <input type="text" class="form-control border"
+                                id="exampleInputText1"
+                                placeholder="commentaire">
+                            </div>
+                            <div class="col-md-6 grid-margin toright">
+                              <button class="btn btn-icon ok border ok"
+                                type="button"
+                                id="button-search-addon"><i class="feather
+                                  icon-check"></i>Valider</button>
+                              <button class="btn btn-icon ok border no"
+                                type="button" [swal]="{
+                                position: 'top-end', title: 'Annulation', text:
+                                '',
+                                showConfirmButton: false, timer: 1500, icon:
+                                'error'}"
+                                (click)="modal.close('by: close icon')"
+                                id="button-search-addon"><i
+                                  class="feather icon-x "></i>Annuler</button>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </div>
+                    <div class="col-md-2 grid-margin" aria-label="Close"
+                      type="button"
+                      *ngFor="let prod of Products"
+                      [hidden]="prod.categorie!=cat.Categorie ||
+                      prod.Type=='Composé' ||
+                      prod.Affichage=='Desactivé' ">
+                      <div class="card style border carte">
+                        <div class="card-body align-items-center">
+                          <p class="text-muted mb-3 style">{{prod.ProductName}}
+                            &nbsp; {{prod.Pricev}} € </p>
+                          <p class="text-muted mb-3 style" [hidden]="prod.promo<0
+                            || prod.promo==null">Reduction : - {{prod.promo}} %
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 grid-margin">
+      <div class="card border">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3 grid-margin ">
+              <div class="card article border">
+                <div class="card-body d-flex flex-column align-items-center">
+                  <p class="text-muted mb-3 article"> 0 Articles</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin">
+              <div class="card border">
+                <div class="card-body d-flex flex-column align-items-center">
+                  <p class="text-muted mb-3 pr"> 0 €</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin">
+              <div class="card style border">
+                <div class="card-body d-flex flex-column align-items-center">
+                  <p class="text-muted mb-3 style">N°</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 grid-margin ">
+            </div>
+            <div class="col-md-3 grid-margin">
+              <div class="card style border">
+                <div class="card-body d-flex flex-column align-items-center">
+                  <p class="text-muted mb-3 style"><i class="feather
+                      icon-delete"></i>&nbsp;&nbsp;Supprimer</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin">
+              <div class="card style border">
+                <div class="card-body d-flex flex-column align-items-center">
+                  <p class="text-muted mb-3 style"><i class="feather
+                      icon-shuffle"></i>&nbsp;&nbsp;Attente</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin ">
+            </div>
+          </div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Action</th>
+                    <th>Produit</th>
+                    <th>PU</th>
+                    <th>PT</th>
+                    <th>Quantité</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th></th>
+                    <td></td>
+                    <td>€</td>
+                    <td>€</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #modal let-modal class="border">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel"
+        style="font-size:30px;margin-left:40%;"><i class="feather
+          icon-user-check"></i>&nbsp;&nbsp;&nbsp;{{this.type}}</h5>
+      <button type="button" class="btn-close" (click)="modal.close('by: close
+        icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6 grid-margin stretch-card" type="button"
+          (click)="modal.close('by: close icon')">
+          <div class="card border" style="background-color:royalblue">
+            <div class="card-body d-flex flex-column align-items-center">
+              <p style="color:white;font-size: 30px;"><i class={{this.icon}}></i>&nbsp;&nbsp;&nbsp;{{this.type}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card" type="button"
+          (click)="modal.close('by: close icon')" routerLink={{this.linkc}}>
+          <div class="card border" style="background-color:royalblue">
+            <div class="card-body d-flex flex-column align-items-center">
+              <p style="color:white;font-size: 30px;"><i class={{this.iconc}}></i>&nbsp;&nbsp;&nbsp;{{this.change}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+
+  <ng-template #modal1 let-modal class="border">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel"
+        style="font-size:30px;margin-left:35%;"><i class={{this.icon}}></i>&nbsp;&nbsp;&nbsp;{{this.type}}&nbsp;&nbsp;-&nbsp;&nbsp;<i
+          class={{this.icon1}}></i>&nbsp;&nbsp;&nbsp;{{this.typee}}</h5>
+      <button type="button" class="btn-close" (click)="modal.close('by: close
+        icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6 grid-margin" type="button" *ngFor="let item of
+          items" routerLink={{item.link}} (click)="modal.close('by: close
+          icon')">
+          <div class="card border" style="background-color:royalblue">
+            <div class="card-body d-flex flex-column align-items-center">
+              <p style="color:white;font-size: 30px;"><i class={{item.icon}}></i>&nbsp;&nbsp;&nbsp;{{item.title}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+
+  <ng-template #createclient let-modal class="border">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title addcl"><i class="feather icon-user-plus"></i> Ajouter
+          Client</h3>
+        <form (ngSubmit)="Addclient()">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="mb-3">
+                <p class="warning"> Nom client, Prenom client, civilité, téléphone, Date de naissance, Montant fidélité sont des champs obligatoires </p>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Nom</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.NomClient" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Entrer Nom">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Prénom</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.PrenomClient"
+                  [ngModelOptions]="{standalone: true}" required
+                  placeholder="Entrer Prénom">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3 mt-1">
+                <label class="form-label">Civilité</label>
+                <select class="form-select form-select-sm mb-3 border"
+                  [(ngModel)]="client.Civilite" [ngModelOptions]="{standalone:
+                  true}" required>
+                  <option selected value="M">M</option>
+                  <option value="Mme">Mme</option>
+                  <option value="Famille">Famille</option>
+                  <option value="Entreprise">Entreprise</option>
+                  <option value="Groupe">Group</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Société</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.Societe" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Entrer société">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Téléphone</label>
+                <input type="number" class="form-control"
+                  [(ngModel)]="client.Telephone" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Entrer N téléphone">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control"
+                  [(ngModel)]="client.Email" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Entrer Email">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Date de naissance</label>
+                <input type="date" class="form-control"
+                  [(ngModel)]="client.DateNaissance"
+                  [ngModelOptions]="{standalone: true}" required>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Adresse</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.Adresse" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Entrer adresse">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Ville</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.Ville" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Entrer ville">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Code Postale</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.CodePostal" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Entrer société">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Batiment</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.Batiment" [ngModelOptions]="{standalone:
+                  true}" required placeholder="N Bat expl">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Etage</label>
+                <input type="number" class="form-control"
+                  [(ngModel)]="client.Etage" [ngModelOptions]="{standalone:
+                  true}" required placeholder="N Etage">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Sonnette</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.Sonette" [ngModelOptions]="{standalone:
+                  true}" required placeholder="sonnette">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Code1</label>
+                <input type="number" class="form-control"
+                  [(ngModel)]="client.Code1" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Code N 1">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Code2</label>
+                <input type="number" class="form-control"
+                  [(ngModel)]="client.Code2" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Code N 2">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Code3</label>
+                <input type="number" class="form-control"
+                  [(ngModel)]="client.Code3" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Code N 3">
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="mb-3">
+                <label class="form-label">Commentaire</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.Commentaire"
+                  [ngModelOptions]="{standalone: true}" required
+                  placeholder="Entrer commentaire">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Montant fidélité</label>
+                <input type="number" class="form-control"
+                  [(ngModel)]="client.Montantfidilite"
+                  [ngModelOptions]="{standalone: true}" required
+                  placeholder="Entrer Montant">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Code barre</label>
+                <input type="text" class="form-control"
+                  [(ngModel)]="client.Codebarre" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Entrer code barre">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label class="form-label">Nombre de commande de l année</label>
+                <input type="number" class="form-control"
+                  [(ngModel)]="client.NbrComa" [ngModelOptions]="{standalone:
+                  true}" required placeholder="Nbr">
+              </div>
+            </div>
+
+          </div>
+
+          <button class="btn anul" [swal]="{position: 'top-end', title:
+            'Annulation', text: '', showConfirmButton: false, timer: 5000, icon:
+            'error'}" (click)="modal.close('by: close icon')">Annuler</button>
+          <button type="submit" class="btn sub" (click)="modal.close('by: close
+            icon')" [disabled]="!client.NomClient || !client.PrenomClient|| !client.Civilite|| !client.Telephone||!client.DateNaissance">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+  </ng-template>

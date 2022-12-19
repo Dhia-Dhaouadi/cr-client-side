@@ -1,0 +1,42 @@
+<div class="row w-100 mx-0 auth-page">
+  <div class="col-md-12 col-xl-8 mx-auto">
+    <div class="card">
+      <div class="row">
+        <div class="col-md-4 pe-md-0">
+          <div class="auth-side-wrapper"
+            style="background-image:url(assets/images/login.jpg)">
+          </div>
+        </div>
+        <div class="col-md-8 ps-md-0">
+          <div class="auth-form-wrapper px-4 py-5">
+            <a routerLink="." class="nobleui-logo d-block mb-2 title">Digi<span>Caisse</span></a>
+            <h5 class="text-muted fw-normal mb-4 tt"></h5>
+            <form class="forms-sample" (ngSubmit)="Login()" [formGroup]="form">
+              <div class="mb-3">
+                <input type="number" class="form-control" id="CodeEntreprise"
+                  name="CodeEntreprise" formControlName="CodeEntreprise"
+                  placeholder="Code Entreprise" [ngClass]="{ 'is-invalid' :
+                  submitted && f.CodeEntreprise.errors}">
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="NomEntreprise"
+                  name="NomEntreprise" formControlName="NomEntreprise"
+                  placeholder="Nom Entreprise" [ngClass]="{ 'is-invalid' : submitted &&
+                  f.NomEntreprise.errors}">
+              </div>
+              <div class="mb-3">
+                <input type="password" class="form-control" id="Login"
+                  name="Login" formControlName="Login" placeholder="Mot de passe" [ngClass]="{ 'is-invalid' : submitted &&
+                  f.Login.errors}">
+              </div>
+
+              <div>
+                <button type="submit" class="btn me-2 mb-2 mb-md-0 cnx">Connexion</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

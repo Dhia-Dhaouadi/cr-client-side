@@ -1,0 +1,54 @@
+.subm {
+  color: white;
+  background-color: royalblue;
+  margin-left: 85%;
+  border-radius: 20px;
+}
+.sub {
+  color: white;
+  background-color: royalblue;
+  margin-left: 1%;
+  border-radius: 20px;
+}
+.anul {
+  color: white;
+  background-color: red;
+  margin-left: 81%;
+  border-radius: 20px;
+}
+
+.categ {
+  color: white;
+  background-color: royalblue;
+  border-radius: 20px;
+  margin-left: 85%;
+}
+.compo {
+  color: white;
+  background-color: royalblue;
+  border-radius: 20px;
+  margin-left: 1%;
+}
+
+.t {
+  margin-left: 2%;
+}
+
+.border {
+  border-radius: 10px;
+}
+
+.pagination {
+  margin-top: 3%;
+  margin-left: 65%;
+}
+
+.lar {
+  width: 70px;
+}
+
+.loading{
+  position: absolute;
+  margin-left: 40%;
+  margin-top: 10%;
+}

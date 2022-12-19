@@ -1,0 +1,129 @@
+.style{
+  background-color: red;
+  font-size: 15px;
+  color:white !important;
+}
+.espace{
+  margin-left: 5%;
+}
+.article{
+  background-color:royalblue;
+  font-size: 15px;
+  color:white !important;
+}
+.recherche{
+  background-color: royalblue;
+  color:white;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+}
+.nav-it{
+  font-size: 25px;
+  background-color: royalblue !important;
+  color: white !important;
+}
+
+h2{
+color:royalblue;
+margin-left: 35%;
+}
+h5{
+  color:royalblue;
+  margin-left: 2%;
+}
+.border{
+border-radius: 10px;
+}
+
+.ok{
+background-color: royalblue;
+color: white;
+width: 150px;
+height: 50px;
+}
+.no{
+background-color: red;
+color: white;
+width: 150px;
+height: 50px;
+margin-left:2%;
+}
+
+.mb-6{
+margin-top: 2% !important;
+}
+
+.titre{
+margin-left: 25% !important;
+color:royalblue !important;
+}
+
+.check{
+  font-size: 20px !important;
+  margin-right:3%;
+  margin-top: 3%;
+}
+
+.fidelite{
+margin-left: 8%;
+}
+.alerte{
+margin-right:7%;
+color: red;
+font-size: 40px !important;
+margin-top: 30% !important;
+}
+
+#top{
+margin-top:12% !important;
+}
+
+.carte{
+  height: 140px;
+}
+.toright{
+  margin-left: 70%;
+}
+
+.addcl{
+  color: red;
+  margin-left: 45%;
+}
+
+.sub{
+  color: white;
+  background-color: royalblue;
+  margin-left: 1%;
+  border-radius: 20px;
+}
+.anul{
+  color: white;
+  background-color: red;
+  margin-left: 81%;
+  border-radius: 20px;
+}
+
+.subm{
+  color: white;
+  background-color: royalblue;
+  margin-left: 87%;
+  border-radius: 20px;
+
+}
+
+.pr{
+  color:black !important;
+  font-size: 30px;
+}
+
+.loading{
+  position: absolute;
+  margin-left: 40%;
+  margin-top: 15%;
+}
+
+.warning{
+  color: royalblue;
+  margin-left: 20%;
+}

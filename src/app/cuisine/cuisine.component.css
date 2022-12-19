@@ -1,0 +1,27 @@
+.top{
+    margin-top: 15%;
+    margin-left: 10%;
+}
+.titre{
+    text-align: center;
+    margin-top: 5%;
+}
+.digi{
+    color:red;
+}
+.caisse{
+    color: royalblue;
+}
+.partie{
+    color: royalblue;
+    margin-top: 3%;
+}
+.card{
+    background-color: royalblue;
+    color: white;
+    border-radius: 20px;
+    font-size: large;
+}
+.card h1{
+    text-align: center;
+}

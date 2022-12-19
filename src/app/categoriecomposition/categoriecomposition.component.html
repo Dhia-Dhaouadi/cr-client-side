@@ -1,0 +1,156 @@
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title"><i class="feather icon-codesandbox"></i>
+          Catégorie de Composition produit</h4>
+        <button class="btn categ" (click)="openXlModal(Addcatcom)">Ajouter
+          categorie Composition</button>
+           <div>
+            <select  class="form-select lar border" (change)="OnTableSizechange($event)">
+                 <option *ngFor="let size of TableSizes">
+                    {{size}}
+                 </option>
+            </select>
+          </div>
+          <div class="spinner-border text-primary loading" role="status" *ngIf="!Compocat">
+          </div>
+        <div class="table-responsive mt-3">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Produit</th>
+                <th>Catégorie de composition</th>
+                <th>Affichage</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let catco of Compocat  | paginate:{
+              itemsPerPage:TableSize,
+              currentPage:Page,
+              totalItems:Count }; let i = index">
+              <tr>
+                <td class="py-1">{{catco.id}}</td>
+                <td class="py-1">{{catco.Product}}</td>
+                <td class="py-1">{{catco.CatgorieCompo}}</td>
+                <td class="py-1">{{catco.Affichage}}</td>
+                <td><a class="btn btn-primary" type="button" (click)="openXlModal(catcompdetails)"><i class="feather icon-eye"></i></a>
+                  <a class="btn btn-primary t" type="button" (click)="openXlModal(updatecatcom)"><i class="feather icon-edit"></i></a>
+                  <a class="btn btn-primary t" type="button" style="display: none;"><i class="feather icon-delete"></i></a></td>
+                  <ng-template #catcompdetails let-modal class="border">
+                    <div class="modal-header">
+                      <h5><i class="feather icon-codesandbox"></i> {{catco.CatgorieCompo}}</h5>
+                      <button type="button" class="btn-close" (click)="modal.close('by: close
+                        icon')" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <div class="mb-3">
+                              <h5>Produit : {{catco.Product}}</h5>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="mb-3">
+                              <h5>Catégorie de Composition : {{catco.CatgorieCompo}}</h5>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="mb-3">
+                              <h5>Affichage : {{catco.Affichage}}</h5>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </ng-template>
+                  <ng-template #updatecatcom let-modal class="border">
+                    <div class="modal-header">
+                      <h5><i class="feather icon-codesandbox"></i> Ajouter Catégorie composition</h5>
+                      <button type="button" class="btn-close" (click)="modal.close('by: close
+                        icon')" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <h5>Produit :  {{catco.Product}}</h5>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <h5>Catégorie de Composition : {{catco.CatgorieCompo}}</h5>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="mb-3 mt-1">
+                              <label class="form-label">Affichage</label>
+                              <select class="form-select form-select-sm mb-3 border" [(ngModel)]="catco.Affichage" [ngModelOptions]="{standalone: true}" required>
+                                <option value="Desactivé">Desactivé</option>
+                                <option value="Activé">Activé</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <button class="btn anul" (click)="modal.close('by: close icon')"
+                          [swal]="{position: 'top-end', title: 'Annulation', text: '',
+                          showConfirmButton: false, timer: 1500, icon: 'error'}">Annuler</button>
+                        <button type="submit" (click)="modal.close('by: close icon')" [disabled]="!catco.CatgorieCompo || !catco.Affichage" (click)="UpdateCategoriecomposition(catco)" class="btn sub">Enregistrer</button>
+                      </form>
+                    </div>
+                  </ng-template>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <pagination-controls  previousLabel="Prev" nextLabel="Next" (pageChange)="OnTableDataChange($event)">
+            </pagination-controls>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #Addcatcom let-modal class="border">
+  <div class="modal-header">
+    <h5><i class="feather icon-codesandbox"></i> Ajouter Catégorie composition</h5>
+    <button type="button" class="btn-close" (click)="modal.close('by: close
+      icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Catégorie -- Produit</label>
+            <select class="form-select form-select-sm mb-3 border" (change)="getidCat($event)">
+              <option *ngFor="let p of Products" value="{{p.id}}">{{p.categorie}} -- {{p.ProductName}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Nom Catégorie</label>
+            <input type="text" class="form-control" [(ngModel)]="Comcat.CatgorieCompo" [ngModelOptions]="{standalone: true}" required placeholder="Entrer Catégorie">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="mb-3 mt-1">
+            <label class="form-label">Affichage</label>
+            <select class="form-select form-select-sm mb-3 border" [(ngModel)]="Comcat.Affichage" [ngModelOptions]="{standalone: true}" required>
+              <option value="Desactivé">Desactivé</option>
+              <option value="Activé">Activé</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn anul" (click)="modal.close('by: close icon')"
+        [swal]="{position: 'top-end', title: 'Annulation', text: '',
+        showConfirmButton: false, timer: 1500, icon: 'error'}">Annuler</button>
+      <button type="submit" (click)="modal.close('by: close icon')" (click)="AddCompoCat()"  [disabled]="!Comcat.CatgorieCompo || !Comcat.Affichage" class="btn sub">Enregistrer</button>
+    </form>
+  </div>
+</ng-template>

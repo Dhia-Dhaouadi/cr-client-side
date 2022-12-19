@@ -1,0 +1,362 @@
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title"><i class="feather icon-box"></i> Produit</h6>
+        <button type="submit" class="btn subm"
+          (click)="openXlModal(Addproduct)">Ajouter Produit</button>
+        <div>
+          <select class="form-select lar border"
+            (change)="OnTableSizechange($event)">
+            <option *ngFor="let size of TableSizes">
+              {{size}}
+            </option>
+          </select>
+        </div>
+        <div class="spinner-border text-primary loading" role="status" *ngIf="!products">
+        </div>
+        <div class="table-responsive pt-3">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Categorie</th>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>TVA</th>
+                <th>Réduction</th>
+                <th>Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let prod of products | paginate:{
+              itemsPerPage:TableSize,
+              currentPage:Page,
+              totalItems:Count }; let i= index">
+              <tr>
+                <td>{{prod.id}}</td>
+                <td>{{prod.categorie}}</td>
+                <td>{{prod.ProductName}}</td>
+                <td>{{prod.Pricev}} €</td>
+                <td>{{prod.TVA}} %</td>
+                <td>{{prod.promo}}</td>
+                <td>{{prod.Type}}</td>
+                <td><a class="btn btn-primary" type="button"
+                    (click)="openXlModal(productdetails)"><i class="feather
+                      icon-eye"></i></a>
+                  <a class="btn btn-primary t" type="button"
+                    (click)="openXlModal(updateprod)"><i class="feather
+                      icon-edit"></i></a>
+                  <a class="btn btn-primary t" type="button"
+                    style="display:none"><i class="feather icon-delete"></i></a></td>
+              </tr>
+              <ng-template #productdetails let-modal class="border">
+                <div class="modal-header">
+                  <h5><i class="feather icon-box"></i> {{prod.ProductName}}</h5>
+                  <button type="button" class="btn-close"
+                    (click)="modal.close('by: close
+                    icon')" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>Catégorie : {{prod.categorie}}</h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>Nom de produit : {{prod.ProductName}}</h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>Affichage dans cuisine : {{prod.Affichagecusine}}</h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>Prix de vente : {{prod.Pricev}} €</h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>Prix de vente pro : {{prod.Pricevp}} €</h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>TVA : {{prod.TVA}} %</h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>Unite : {{prod.unite}}</h5>
+
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>Date d'ajout : {{prod.DateAjout | date:'medium'}}</h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5 *ngIf="prod.promo!=null">Réduction : {{prod.promo}}
+                          %</h5>
+                        <h5 class="form-label" *ngIf="prod.promo==null">Réduction
+                          : Pas de réduction</h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>Type : {{prod.Type}}</h5>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="mb-3">
+                        <h5>Affichage: {{prod.Affichage}}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #updateprod let-modal class="border">
+                <div class="modal-header">
+                  <h5><i class="feather icon-package"></i> {{prod.ProductName}}</h5>
+                  <button type="button" class="btn-close"
+                    (click)="modal.close('by: close
+                    icon')" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Catégorie : {{prod.categorie}}</h5>
+
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Nom de produit : {{prod.ProductName}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Date d'ajout : {{prod.DateAjout | date:'medium'}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Prix de vente (€)</label>
+                          <input type="number" class="form-control" value="0"
+                            [(ngModel)]="prod.Pricev"
+                            [ngModelOptions]="{standalone: true}" required
+                            placeholder="Entrer prix de vente">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Prix de vente pro (€)</label>
+                          <input type="number" class="form-control" value="0"
+                            [(ngModel)]="prod.Pricevp"
+                            [ngModelOptions]="{standalone: true}" required
+                            placeholder="Entrer prix de vente pro">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Unite</label>
+                          <select class="form-select form-select-sm mb-3 border"
+                            [(ngModel)]="prod.unite"
+                            [ngModelOptions]="{standalone: true}" required>
+                            <option value="kg">Kg</option>
+                            <option value="Pièce">Pièce</option>
+                            <option value="Barquette">Barquette</option>
+                            <option value="Littre">Littre</option>
+                            <option value="Pas unité">Pas unité</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-3 mt-4">
+                          <h5>TVA : {{prod.TVA}} %</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Affichage dans cuisine</label>
+                          <input type="text" class="form-control"
+                            placeholder="Entrer abréviation"
+                            [(ngModel)]="prod.Affichagecusine"
+                            [ngModelOptions]="{standalone: true}" required>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Entrer une réduction (%)</label>
+                          <input type="number" class="form-control"
+                            placeholder="Réduction" [(ngModel)]="prod.promo"
+                            [ngModelOptions]="{standalone: true}" required>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Type (Entrer le type de
+                            produit svp)</label>
+                          <select class="form-select form-select-sm mb-3 border"
+                            [(ngModel)]="prod.Type"
+                            [ngModelOptions]="{standalone: true}" required>
+                            <option value="Composé">Composé</option>
+                            <option value="Pas composé">Pas composé</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">Affichage</label>
+                          <select class="form-select form-select-sm mb-3 border"
+                            [(ngModel)]="prod.Affichage" [ngModelOptions]="{standalone: true}"
+                            required>
+                            <option value="Desactivé">Desactivé</option>
+                            <option value="Activé">Activé</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="btn anul" (click)="modal.close('by: close
+                      icon')" [swal]="{position: 'top-end', title: 'Annulation',
+                      text: '', showConfirmButton: false, timer: 1500, icon:
+                      'error'}">Annuler</button>
+                    <button type="submit" class="btn sub"
+                      (click)="modal.close('by: close icon')"
+                      (click)="Updateproduit(prod)" [disabled]="!prod.ProductName || !prod.Pricev|| !prod.Pricevp|| !prod.unite||!prod.Affichagecusine ||!prod.DateAjout ||!prod.Type ||!prod.Affichage">Enregistrer</button>
+                  </form>
+
+                </div>
+              </ng-template>
+
+            </tbody>
+          </table>
+          <div class="pagination">
+            <pagination-controls previousLabel="Prev" nextLabel="Next"
+              (pageChange)="OnTableDataChange($event)">
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #Addproduct let-modal class="border">
+  <div class="modal-header">
+    <h5><i class="feather icon-package"></i> Ajouter Produit</h5>
+    <button type="button" class="btn-close" (click)="modal.close('by: close
+      icon')" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Catégorie</label>
+            <select class="form-select form-select-sm mb-3 border"
+              (change)="gettva($event)">
+              <option *ngFor="let c of category" value="{{c.id}}">{{c.Categorie}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Nom de produit</label>
+            <input type="text" class="form-control"
+              [(ngModel)]="product.ProductName" [ngModelOptions]="{standalone:
+              true}" required placeholder="Entrer Nom Produit">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Prix de vente (€)</label>
+            <input type="number" class="form-control" value="0"
+              [(ngModel)]="product.Pricev" [ngModelOptions]="{standalone: true}"
+              required placeholder="Entrer prix de vente">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Prix de vente pro (€)</label>
+            <input type="number" class="form-control" value="0"
+              [(ngModel)]="product.Pricevp" [ngModelOptions]="{standalone:
+              true}" required placeholder="Entrer prix de vente pro">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Unite</label>
+            <select class="form-select form-select-sm mb-3 border"
+              [(ngModel)]="product.unite" [ngModelOptions]="{standalone: true}"
+              required>
+              <option value="kg">Kg</option>
+              <option value="Pièce">Pièce</option>
+              <option value="Barquette">Barquette</option>
+              <option value="Littre">Littre</option>
+              <option value="Pas unité">Pas unité</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3 mt-4">
+            <h5>TVA : {{product.TVA}} %</h5>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Affichage dans cuisine</label>
+            <input type="text" class="form-control" placeholder="Entrer
+              abréviation" [(ngModel)]="product.Affichagecusine"
+              [ngModelOptions]="{standalone: true}" required>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Date de création</label>
+            <input type="date" class="form-control"
+              [(ngModel)]="product.DateAjout" [ngModelOptions]="{standalone:
+              true}" required placeholder="">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Type (Entrer le type de produit svp)</label>
+            <select class="form-select form-select-sm mb-3 border"
+              [(ngModel)]="product.Type" [ngModelOptions]="{standalone: true}"
+              required>
+              <option value="Composé">Composé</option>
+              <option value="Pas composé">Pas composé</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="mb-3">
+            <label class="form-label">Affichage</label>
+            <select class="form-select form-select-sm mb-3 border"
+              [(ngModel)]="product.Affichage" [ngModelOptions]="{standalone: true}"
+              required>
+              <option value="Desactivé">Desactivé</option>
+              <option value="Activé">Activé</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn anul" (click)="modal.close('by: close icon')"
+        [swal]="{position: 'top-end', title: 'Annulation', text: '',
+        showConfirmButton: false, timer: 1500, icon: 'error'}">Annuler</button>
+      <button type="submit" class="btn sub" (click)="modal.close('by: close
+        icon')" (click)="Addproduit()" [disabled]="!product.ProductName || !product.Pricev|| !product.Pricevp|| !product.unite||!product.Affichagecusine ||!product.DateAjout ||!product.Type ||!product.Affichage">Enregistrer</button>
+    </form>
+
+  </div>
+</ng-template>

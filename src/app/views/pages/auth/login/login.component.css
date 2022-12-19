@@ -1,0 +1,21 @@
+:host {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cnx{
+  background-color: royalblue;
+  color: white;
+  width: 150px;
+  margin-left: 70%;
+}
+
+.title{
+  color:red !important;
+  font-size: 40px;
+}
+.tt{
+  color: royalblue !important;
+}

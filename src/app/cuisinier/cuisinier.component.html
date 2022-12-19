@@ -1,0 +1,212 @@
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title"><i class="feather icon-user"></i> Cuisinier</h6>
+        <select class="form-select lar border"
+          (change)="OnTableSizechange($event)">
+          <option *ngFor="let size of TableSizes">
+            {{size}}
+          </option>
+        </select>
+        <div class="spinner-border text-primary loading" role="status" *ngIf="!users">
+        </div>
+        <div class="table-responsive pt-3">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>Date d'ajout</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let user of users | paginate:{
+              itemsPerPage:TableSize,
+              currentPage:Page,
+              totalItems:Count }; let i= index">
+              <tr *ngIf="user.Role=='Cuisinier'">
+                <td>{{user.id}}</td>
+                <td>{{user.NomUser}}</td>
+                <td>{{user.PrenomUser}}</td>
+                <td>{{user.Telephone}}</td>
+                <td>{{user.Email}}</td>
+                <td>{{user.DateAjout | date:'medium'}}</td>
+                <td><a class="btn btn-primary" type="button"
+                    (click)="openXlModal(userdetails)"><i class="feather
+                      icon-eye"></i></a>
+                  <a class="btn btn-primary t" type="button"
+                    (click)="openXlModal(updateuser)"><i class="feather
+                      icon-edit"></i></a>
+                  <a class="btn btn-primary t" type="button"
+                    (click)="DeleteCaissier(user.id)"><i class="feather
+                      icon-delete"></i></a></td>
+                <ng-template #userdetails let-modal class="border">
+                  <div class="modal-header">
+                    <h5><i class="feather icon-user"></i> {{user.NomUser}}
+                      {{user.PrenomUser}}</h5>
+                    <button type="button" class="btn-close"
+                      (click)="modal.close('by: close
+                      icon')" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Nom : {{user.NomUser}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Prénom : {{user.PrenomUser}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Login (code d'accès) : {{user.Login}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Code Entreprise : {{user.CodeEntreprise}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Nom Entreprise : {{user.NomEntreprise}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Email : {{user.Email}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Téléphone : {{user.Telephone}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Role : {{user.Role}}</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="mb-3">
+                          <h5>Date d'ajout : {{user.DateAjout | date:'medium'}}</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #updateuser let-modal class="border">
+                  <div class="card">
+                    <div class="card-body">
+                      <h3 class="card-title addcl"><i class="feather icon-user"></i>
+                        {{user.NomUser}} {{user.PrenomUser}}</h3>
+                      <form (ngSubmit)="updateUser(user)">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <div class="mb-3">
+                              <h5>Nom Entreprise : {{user.NomEntreprise}}</h5>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="mb-3">
+                              <h5>Code Entreprise : {{user.CodeEntreprise}}</h5>
+                            </div>
+                          </div>
+                          <div class="col-sm-4">
+                            <div class="mb-3">
+                              <h5>Date d'ajout : {{user.DateAjout | date:'medium'}}</h5>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <label class="form-label">Nom</label>
+                              <input type="text" class="form-control"
+                                placeholder="Entrer Nom"
+                                [(ngModel)]="user.NomUser"
+                                [ngModelOptions]="{standalone: true}" required>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <label class="form-label">Prénom</label>
+                              <input type="text" class="form-control"
+                                placeholder="Entrer Prénom"
+                                [(ngModel)]="user.PrenomUser"
+                                [ngModelOptions]="{standalone: true}" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <label class="form-label">Login</label>
+                              <input type="password" class="form-control"
+                                placeholder="Entrer Login"
+                                [(ngModel)]="user.Login"
+                                [ngModelOptions]="{standalone: true}" required>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <label class="form-label">Email</label>
+                              <input type="email" class="form-control"
+                                placeholder="Enter Email"
+                                [(ngModel)]="user.Email"
+                                [ngModelOptions]="{standalone: true}" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <label class="form-label">Role</label>
+                              <select class="form-select form-select-sm mb-3
+                                border" [(ngModel)]="user.Role"
+                                [ngModelOptions]="{standalone: true}" required>
+                                <option value="Caissier">Caissier</option>
+                                <option value="Cuisinier">Cuisinier</option>
+                                <option value="Livreur">Livreur</option>
+                                <option value="Pointage">Pointage</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="mb-3">
+                              <label class="form-label">Téléphone</label>
+                              <input type="text" class="form-control"
+                                placeholder="Entrer N° Tel"
+                                [(ngModel)]="user.Telephone"
+                                [ngModelOptions]="{standalone: true}" required>
+                            </div>
+                          </div>
+                        </div>
+                        <button class="btn anul" [swal]="{position: 'top-end',
+                          title: 'Annulation', text: '', showConfirmButton:
+                          false, timer: 1500, icon: 'error'}"
+                          (click)="modal.close('by: close icon')">Annuler</button>
+                        <button type="submit" class="btn subm"
+                          (click)="modal.close('by: close icon')" [disabled]="!user.NomEntreprise || !user.CodeEntreprise|| !user.NomUser|| !user.PrenomUser||!user.Login || !user.Email || !user.Role || !user.Telephone || !user.DateAjout">Enregistrer</button>
+                      </form>
+                    </div>
+                  </div>
+                </ng-template>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <pagination-controls previousLabel="Prev" nextLabel="Next"
+              (pageChange)="OnTableDataChange($event)">
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

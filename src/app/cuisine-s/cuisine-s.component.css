@@ -1,0 +1,16 @@
+.time {
+  color: royalblue;
+  margin-left: 45%;
+  margin-top: 2%;
+}
+
+.cuis {
+  font-size: 25px;
+  color: black;
+}
+
+.loading{
+  position: absolute;
+  margin-left: 50%;
+  margin-top: 15%;
+}
